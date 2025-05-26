@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medios_de_pagos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('medios_de_pago', function (Blueprint $table) {
+            $table->bigIncrements('id_medio_pago');
+            $table->string('descripcion', 30)->unique();
             $table->timestamps();
         });
     }

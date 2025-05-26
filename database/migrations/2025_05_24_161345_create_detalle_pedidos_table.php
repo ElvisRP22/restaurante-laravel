@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('detalle_pedidos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_detalle');
+            $table->unsignedBigInteger('id_pedido');
+            $table->unsignedBigInteger('id_producto');
+            $table->decimal('cantidad', 8, 2);
+            $table->decimal('precio', 8, 2);
+            $table->decimal('subtotal', 8, 2);
             $table->timestamps();
         });
     }

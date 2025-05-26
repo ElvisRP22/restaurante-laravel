@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mesas', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_mesa');
+            $table->integer('numero_mesa')->unique();
+            $table->integer('capacidad');
+            $table->boolean('estado');
             $table->timestamps();
         });
     }
