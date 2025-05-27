@@ -6,24 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_empleado');
+            $table->string('dni',10)->unique();
+            $table->string('nombre',100);
+            $table->string('rol',50);
+            $table->string('usuario', 50)->unique();
+            $table->string('clave');
+            $table->rememberToken();
+            $table->date('fecha_ingreso')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('empleados');

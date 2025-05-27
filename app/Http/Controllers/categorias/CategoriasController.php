@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\categorias;
 
 use Illuminate\Http\Request;
 use App\Repositories\ICategoriasRepository;
+use App\Http\Controllers\Controller;
 
 class CategoriasController extends Controller
 {
@@ -24,7 +25,7 @@ class CategoriasController extends Controller
     {
         //
         $categorias = $this->repo->getAll();
-        return view('categorias.index', compact('categorias'));
+        return view('home.categorias.index', compact('categorias'));
     }
 
     /**
@@ -35,7 +36,7 @@ class CategoriasController extends Controller
     public function create()
     {
         //
-        return view('categorias.create');
+        return view('home.categorias.create');
     }
 
     /**
@@ -52,7 +53,7 @@ class CategoriasController extends Controller
         ]);
 
         $this->repo->create($request->all());
-        return redirect()->route('categorias.index');
+        return redirect()->route('home.categorias.index');
     }
 
     /**
@@ -77,7 +78,7 @@ class CategoriasController extends Controller
     {
         //
         $categoria = $this->repo->getById($id);
-        return view('productos.edit', compact('producto'));
+        return view('home.categorias.edit', compact('categoria'));
     }
 
     /**
@@ -94,7 +95,7 @@ class CategoriasController extends Controller
             'descripcion' => 'required|string|max:255',
         ]);
         $this->repo->update($id, $request->all());
-        return redirect()->route('categorias.index');
+        return redirect()->route('home.categorias.index');
     }
 
     /**
@@ -107,6 +108,6 @@ class CategoriasController extends Controller
     {
         //
         $this->repo->delete($id);
-        return redirect()->route('categorias.index');
+        return redirect()->route('home.categorias.index');
     }
 }
