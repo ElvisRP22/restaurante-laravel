@@ -1,9 +1,8 @@
-@extends('layouts.app')
-
-@section('title', 'Listado de categorias')
-
+@extends('layouts.sidebar')
+@section('title', 'Listado de Categorías')
+@section('content')
 <div class="container mt-5">
-    <h1 class="mb-4">Listado de Categorias</h1>
+    <h1 class="mb-4">Listado de Categorías</h1>
 
     <button class="btn btn-success mb-3" onclick="abrirModal()">Nueva Categoría</button>
 
@@ -22,21 +21,21 @@
                 <td>{{ $categoria->id_categoria }}</td>
                 <td>{{ $categoria->descripcion }}</td>
                 <td>
-                    <a href="{{ route('home.categorias.show', $categoria->id_categoria) }}" class="btn btn-secondary btn-sm"><i class='bx bxs-show'></i>Ver</a>
-                    <!--<a href="{{ route('home.categorias.edit', $categoria->id_categoria) }}" class="btn btn-primary btn-sm"><i class='bx bxs-pencil'></i>Editar</a>-->
+                    <a href="{{ route('home.categorias.show', $categoria->id_categoria) }}" class="btn btn-secondary btn-sm">
+                        <i class='bx bxs-show'></i> Ver
+                    </a>
                     <button class="btn btn-sm btn-primary" onclick="abrirModal('{{ $categoria->id_categoria }}', '{{ $categoria->descripcion }}')">
-                        <i class='bx bxs-pencil'></i>Editar
+                        <i class='bx bxs-pencil'></i> Editar
                     </button>
                     <form id="form-eliminar-{{ $categoria->id_categoria }}"
-                        action="{{ route('home.categorias.destroy', $categoria->id_categoria) }}"
-                        method="POST" class="d-inline">
+                          action="{{ route('home.categorias.destroy', $categoria->id_categoria) }}"
+                          method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ $categoria->id_categoria }}')">
                             <i class='bx bxs-trash'></i> Eliminar
                         </button>
                     </form>
-
                 </td>
             </tr>
             @endforeach
@@ -44,7 +43,7 @@
     </table>
     @else
     <div class="alert alert-warning">
-        No hay categorias registradas.
+        No hay categorías registradas.
     </div>
     @endif
 </div>
@@ -75,6 +74,8 @@
         </form>
     </div>
 </div>
+@endsection
+
 <script>
     function abrirModal(id = null, descripcion = '') {
         const form = document.getElementById('formCategoria');
@@ -105,7 +106,7 @@
 
     function confirmarEliminacion(id) {
         Swal.fire({
-            title: '¿Estás seguro de eliminar esta categoria?',
+            title: '¿Estás seguro de eliminar esta categoría?',
             text: "¡Esta acción no se puede deshacer!",
             icon: 'warning',
             showCancelButton: true,

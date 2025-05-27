@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Login')
 <div class="container mt-5">
     <p class="h2 mb-4 text-center">Sistema de Pedidos - Administración</p>
     <div class="row justify-content-center">

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\categorias;
 
 use Illuminate\Http\Request;
 use App\Repositories\ICategoriasRepository;
+use App\Http\Controllers\Controller;
 
 class CategoriasController extends Controller
 {
