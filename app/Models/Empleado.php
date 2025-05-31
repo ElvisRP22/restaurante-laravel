@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable; // Cambiar a esta clase
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Empleados extends Authenticatable
+class Empleado extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 

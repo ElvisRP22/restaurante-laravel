@@ -26,7 +26,7 @@
       </div>
       <ul class="sidebar-nav">
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="{{ route('home.productos.index') }}" class="sidebar-link">
             <i class='bx bxs-shopping-bag-alt'></i>
             <span>Productos</span>
           </a>

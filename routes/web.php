@@ -20,6 +20,7 @@ Auth::routes();
 Route::middleware(['auth', 'admin'])->prefix('home')->name('home.')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
     Route::resource('categorias', CategoriasController::class);
+    Route::resource('productos', App\Http\Controllers\ProductoController::class);
 });
 
 

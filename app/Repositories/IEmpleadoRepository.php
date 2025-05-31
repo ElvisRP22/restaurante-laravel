@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface IEmpleadosRepository
+interface IEmpleadoRepository
 {
     public function create(array $data);
     public function findByUsername(string $username);

@@ -28,12 +28,13 @@ class Pedidos extends Model
     // un pedido tiene un empleado
     public function empleados()
     {
-        return $this->belongsTo(Empleados::class, 'id_empleado', 'id_empleado');
+        return $this->belongsTo(Empleado::class, 'id_empleado', 'id_empleado');
     }
 
-    public function pedidoEstado()
+    public function estados()
     {
-        return $this->hasMany(PedidosEstados::class, ['id_estado', 'id_categoria'], ['id_estado', 'id_categoria']);
+        return $this->belongsToMany(Estados::class, 'pedidos_estados', 'id_pedido', 'id_estado')
+                    ->withTimestamps();
     }
 
     // un pedido tiene muchos pagos

@@ -15,8 +15,8 @@ class Estados extends Model
         'descripcion'
     ];
 
-    public function pedidosEstados()
+    public function pedidos()
     {
-        return $this->hasMany(PedidosEstados::class, ['id_estado', 'id_categoria'], ['id_estado', 'id_categoria']);
+        return $this->belongsToMany(Pedidos::class, "pedidos_estados", "id_estado", "id_pedido");
     }
 }

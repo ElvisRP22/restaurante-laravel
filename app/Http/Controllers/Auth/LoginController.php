@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Repositories\IEmpleadosRepository;
+use App\Repositories\IEmpleadoRepository;
 
 class LoginController extends Controller
 {
     protected $redirectTo = '/home';
     protected $empleadoRepository;
 
-    public function __construct(IEmpleadosRepository $empleadoRepository)
+    public function __construct(IEmpleadoRepository $empleadoRepository)
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');

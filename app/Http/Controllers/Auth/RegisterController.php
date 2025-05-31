@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Repositories\IEmpleadosRepository;
+use App\Repositories\IEmpleadoRepository;
 
 class RegisterController extends Controller
 {
@@ -15,7 +15,7 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
     protected $empleadoRepository;
 
-    public function __construct(IEmpleadosRepository $empleadoRepository)
+    public function __construct(IEmpleadoRepository $empleadoRepository)
     {
         $this->middleware('guest');
         $this->empleadoRepository = $empleadoRepository;
