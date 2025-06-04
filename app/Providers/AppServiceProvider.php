@@ -7,7 +7,9 @@ use App\Repositories\ICategoriasRepository;
 use App\Repositories\CategoriasRepository;
 use App\Repositories\IEmpleadoRepository;
 use App\Repositories\EmpleadoRepository;
+use App\Repositories\IMesaRepository;
 use App\Repositories\IProductosRepository;
+use App\Repositories\MesaRepository;
 use App\Repositories\ProductosRepository;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ICategoriasRepository::class, CategoriasRepository::class);
         $this->app->bind(IEmpleadoRepository::class, EmpleadoRepository::class);
         $this->app->bind(IProductosRepository::class, ProductosRepository::class);
+        $this->app->bind(IMesaRepository::class, MesaRepository::class);
     }
 
     /**

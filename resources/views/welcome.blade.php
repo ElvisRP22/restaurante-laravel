@@ -10,7 +10,25 @@
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        .scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
 
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+            /* Oculta scrollbar en WebKit */
+        }
+
+        .btn-carousel {
+            scroll-snap-align: start;
+            margin: 0.5rem;
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,11 +41,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
                 <form class="d-flex" role="search">
                     <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class='bx bxs-cart-alt'></i>
+                        <i class='bx bxs-cart-alt'>Mi pedido</i>
                     </button>
                 </form>
             </div>
@@ -100,32 +116,39 @@
             </span>
         </div>
     </div>
+    <div class="container">
 
-    <div class="container mt-5 mb-5">
-        <div class="row">
+        <div class="scroll-container d-flex mt-3">
+            <button type="button" class="btn btn-outline-warning btn-carousel filter-btn" data-filter="0">Todos</button>
+            @foreach($categorias as $categoria)
+            <button type="button" class="btn btn-outline-warning btn-carousel filter-btn" data-filter="{{ $categoria->id_categoria }}">{{ $categoria->descripcion }}</button>
+            @endforeach
+        </div>
+
+    </div>
+    <div class="container mt-3 mb-3">
+        <div class="row" id="productos">
             @foreach($productos as $producto)
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card mb-3">
+                <div class="card mb-3 producto" data-category="{{ $producto->id_categoria }}">
                     <!-- Mostrar imagen desde /storage -->
-                    <img src="{{ asset('storage/' . $producto->ruta_imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
-
+                    <img src="{{ asset('storage/imagenes/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $producto->nombre }}</h5>
                         <p class="card-text">{{ $producto->descripcion }}</p>
-                        <div class="d-flex justify-content-start align-items-center">
-                            <span class="h5 mb-0 me-5">${{ number_format($producto->precio, 2) }}</span>
-                        </div>
+
                     </div>
 
-                    <div class="card-footer d-flex justify-content-between align-items-center bg-light">
-                        <form action="{{ route('carrito.agregar') }}" method="POST">
+                    <div class="card-footer bg-light">
+                        <form action="" method="POST" class="">
                             @csrf
                             <input type="hidden" name="id" value="{{ encrypt($producto->id) }}">
-                            <input type="hidden" name="nombre" value="{{ encrypt($producto->nombre) }}">
-                            <input type="hidden" name="precio" value="{{ encrypt($producto->precio) }}">
-                            <input type="number" name="cantidad" value="1" min="1" max="10" class="form-control form-control-sm w-50 me-2 d-inline">
+                            <div class="d-flex justify-content-space-between align-items-center">
+                                <span class="h5 me-5 mb-2">${{ number_format($producto->precio, 2) }}</span>
+                                <input type="number" name="cantidad" value="1" min="1" max="10" class="form-control ms-5 mb-2">
+                            </div>
 
-                            <button type="submit" class="btn btn-warning btn-sm text-white" name="btnAccion" value="Agregar"
+                            <button type="submit" class="btn btn-sm btn-warning text-white w-100" name="btnAccion" value="Agregar"
                                 {{ $producto->estado ? '' : 'disabled' }}>
                                 Agregar
                             </button>
@@ -139,11 +162,31 @@
 
 
     <!-- Scripts -->
+    <script>
+        //Filtrar productos por categoría
+        const btnFilters = document.querySelectorAll('.filter-btn');
+        const productos = document.querySelectorAll('.producto');
+
+        btnFilters.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filtro = this.getAttribute('data-filter');
+                productos.forEach(producto => {
+                    const categoriaId = producto.getAttribute('data-category');
+                    if (filtro === categoriaId || filtro === '0') {
+                        producto.style.display = 'block';
+                    } else {
+                        producto.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
     @stack('scripts')
+
 </body>
 
 </html>

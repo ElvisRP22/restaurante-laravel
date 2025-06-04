@@ -7,12 +7,12 @@
     <button class="btn btn-success mb-3" onclick="abrirModal()">Nueva Categoría</button>
 
     @if($categorias->count())
-    <table class="table table-bordered">
+    <table class="table ">
         <thead>
             <tr>
-                <th>IDENTIFICADOR</th>
-                <th>DESCRIPCIÓN</th>
-                <th>ACCIONES</th>
+                <th scope="col">#</th>
+                <th scope="col">DESCRIPCIÓN</th>
+                <th scope="col">ACCIONES</th>
             </tr>
         </thead>
         <tbody>
@@ -21,15 +21,12 @@
                 <td>{{ $categoria->id_categoria }}</td>
                 <td>{{ $categoria->descripcion }}</td>
                 <td>
-                    <a href="{{ route('home.categorias.show', $categoria->id_categoria) }}" class="btn btn-secondary btn-sm">
-                        <i class='bx bxs-show'></i> Ver
-                    </a>
                     <button class="btn btn-sm btn-primary" onclick="abrirModal('{{ $categoria->id_categoria }}', '{{ $categoria->descripcion }}')">
                         <i class='bx bxs-pencil'></i> Editar
                     </button>
                     <form id="form-eliminar-{{ $categoria->id_categoria }}"
-                          action="{{ route('home.categorias.destroy', $categoria->id_categoria) }}"
-                          method="POST" class="d-inline">
+                        action="{{ route('home.categorias.destroy', $categoria->id_categoria) }}"
+                        method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ $categoria->id_categoria }}')">
@@ -49,7 +46,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="categoriaModal" tabindex="-1" aria-labelledby="categoriaModalLabel" aria-hidden="true">
+<div class="modal fade" id="categoriaModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="categoriaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form id="formCategoria" method="POST" action="{{ route('home.categorias.store') }}">
             @csrf
@@ -64,6 +61,10 @@
                         <label for="descripcion" class="form-label">Descripción</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                     </div>
+                    <div id="error-descripcion" class="text-danger mt-1" style="display: none;">El campo descripción es obligatorio.</div>
+                    @error('descripcion')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <input type="hidden" id="categoria_id" name="categoria_id">
                 </div>
                 <div class="modal-footer">
@@ -102,6 +103,19 @@
 
         const modal = new bootstrap.Modal(document.getElementById('categoriaModal'));
         modal.show();
+        document.getElementById('formCategoria').addEventListener('submit', function(e) {
+            const descripcion = document.getElementById('descripcion');
+            const errorDiv = document.getElementById('error-descripcion');
+
+            if (descripcion.value.trim() === '') {
+                e.preventDefault(); // Evita el envío
+                errorDiv.style.display = 'block';
+                descripcion.classList.add('is-invalid');
+            } else {
+                errorDiv.style.display = 'none';
+                descripcion.classList.remove('is-invalid');
+            }
+        });
     }
 
     function confirmarEliminacion(id) {

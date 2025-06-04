@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\categorias;
+namespace App\Http\Controllers;
 
+use App\Repositories\IMesaRepository;
 use Illuminate\Http\Request;
-use App\Repositories\ICategoriasRepository;
-use App\Http\Controllers\Controller;
 
-class CategoriasController extends Controller
+class MesaController extends Controller
 {
-
-    private ICategoriasRepository $repo;
-
-    public function __construct(ICategoriasRepository $repo)
+    private IMesaRepository $mesaRepository;
+    
+    public function __construct(IMesaRepository $mesaRepository)
     {
-        $this->repo = $repo;
+        $this->mesaRepository = $mesaRepository;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +21,8 @@ class CategoriasController extends Controller
     public function index()
     {
         //
-        $categorias = $this->repo->getAll();
-        return view('home.categorias.index', compact('categorias'));
+        $mesas = $this->mesaRepository->getAll();
+        return view('home.mesas.index', compact('mesas'));
     }
 
     /**
@@ -36,7 +33,6 @@ class CategoriasController extends Controller
     public function create()
     {
         //
-        return view('home.categorias.create');
     }
 
     /**
@@ -48,13 +44,13 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         //
-        
-        $validated =$request->validate([
-            'descripcion' => 'required|string|max:255',
-        ]);
-
-        $this->repo->create($validated);
-        return redirect()->route('home.categorias.index');
+        $validated = $request->validate(
+            ['numero_mesa' => 'required|numeric|unique:mesas,numero_mesa',
+            'capacidad' => 'required|numeric']
+        );
+        $validated['estado'] = true;
+        $this->mesaRepository->create($validated);
+        return redirect()->route('home.mesas.index');
     }
 
     /**
@@ -66,7 +62,6 @@ class CategoriasController extends Controller
     public function show($id)
     {
         //
-        
     }
 
     /**
@@ -78,8 +73,6 @@ class CategoriasController extends Controller
     public function edit($id)
     {
         //
-        $categoria = $this->repo->getById($id);
-        return view('home.categorias.edit', compact('categoria'));
     }
 
     /**
@@ -92,11 +85,15 @@ class CategoriasController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
-            'descripcion' => 'required|string|max:255',
-        ]);
-        $this->repo->update($id, $request->all());
-        return redirect()->route('home.categorias.index');
+        $validated = $request->validate(
+            [
+            'numero_mesa' => 'required|numeric',
+            'capacidad' => 'required|numeric']
+        );
+        $validated['estado'] = true;
+        $this->mesaRepository->update($id, $validated);
+        return redirect()->route('home.mesas.index');
+
     }
 
     /**
@@ -108,7 +105,7 @@ class CategoriasController extends Controller
     public function destroy($id)
     {
         //
-        $this->repo->delete($id);
-        return redirect()->route('home.categorias.index');
+        $this->mesaRepository->delete($id);
+        return redirect()->route('home.mesas.index');
     }
 }

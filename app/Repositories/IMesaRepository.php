@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 
-interface IProductosRepository
+interface IMesaRepository
 {
     public function getAll();
     public function getById($id);

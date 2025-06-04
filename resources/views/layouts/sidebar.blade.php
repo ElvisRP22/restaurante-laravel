@@ -15,7 +15,7 @@
 <body>
   <div class="wrapper">
     <!-- Sidebar fijo -->
-    <aside id="sidebar">
+    <aside id="sidebar" class="expand">
       <div class="d-flex">
         <button id="toggle-btn" type="button">
           <i class='bx bx-menu'></i>
@@ -32,15 +32,21 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
-            <i class='bx bxs-grid-alt'></i>
-            <span>Pedidos</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
           <a href="{{ route('home.categorias.index') }}" class="sidebar-link">
             <i class='bx bxs-category-alt'></i>
             <span>Categorías</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="{{ route('home.mesas.index') }}" class="sidebar-link">
+            <i class='bx bx-table'></i>
+            <span>Mesas</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">
+            <i class='bx bxs-grid-alt'></i>
+            <span>Pedidos</span>
           </a>
         </li>
         <li class="sidebar-item">
