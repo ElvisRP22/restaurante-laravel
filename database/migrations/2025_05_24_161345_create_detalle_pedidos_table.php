@@ -21,6 +21,9 @@ return new class extends Migration
             $table->decimal('precio', 8, 2);
             $table->decimal('subtotal', 8, 2);
             $table->timestamps();
+
+            $table->foreign('id_pedido')->reference('id_pedido')->on('pedidos')->onDelete('cascade');
+            $table->foreign('id_producto')->reference('id_producto')->on('productos')->onDelete('cascade');
         });
     }
 
