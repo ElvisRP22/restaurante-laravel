@@ -26,7 +26,7 @@
                 <td>{{ $mesa->estado ? 'Libre' : 'Ocupada' }}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="abrirModal('{{ $mesa->id_mesa }}', '{{ $mesa->numero_mesa }}', '{{ $mesa->capacidad }}')">
-                        <i class='bx bxs-pencil'></i> Editar
+                        <i class='bx bxs-pencil'></i>
                     </button>
                     <form id="form-eliminar-{{ $mesa->id_mesa }}"
                         action="{{ route('home.mesas.destroy', $mesa->id_mesa) }}"
@@ -34,7 +34,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ $mesa->id_mesa }}')">
-                            <i class='bx bxs-trash'></i> Eliminar
+                            <i class='bx bxs-trash'></i>
                         </button>
                     </form>
                 </td>
