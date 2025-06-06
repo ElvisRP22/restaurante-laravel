@@ -22,7 +22,7 @@
                 <td>{{ $categoria->descripcion }}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="abrirModal('{{ $categoria->id_categoria }}', '{{ $categoria->descripcion }}')">
-                        <i class='bx bxs-pencil'></i> Editar
+                        <i class='bx bxs-pencil'></i>
                     </button>
                     <form id="form-eliminar-{{ $categoria->id_categoria }}"
                         action="{{ route('home.categorias.destroy', $categoria->id_categoria) }}"
@@ -30,7 +30,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ $categoria->id_categoria }}')">
-                            <i class='bx bxs-trash'></i> Eliminar
+                            <i class='bx bxs-trash'></i>
                         </button>
                     </form>
                 </td>
