@@ -23,7 +23,7 @@
                 <td>{{ $mesa->id_mesa }}</td>
                 <td>{{ $mesa->numero_mesa }}</td>
                 <td>{{ $mesa->capacidad }}</td>
-                <td>{{ $mesa->estado ? 'Libre' : 'Ocupada' }}</td>
+                <td><span class="badge {{$mesa->estado ? 'bg-success' : 'bg-danger'}}">{{ $mesa->estado ? 'Libre' : 'Ocupada' }}</span></td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="abrirModal('{{ $mesa->id_mesa }}', '{{ $mesa->numero_mesa }}', '{{ $mesa->capacidad }}')">
                         <i class='bx bxs-pencil'></i>
@@ -47,6 +47,11 @@
         No hay mesas registradas.
     </div>
     @endif
+    @if($errors->has('numero_mesa'))
+    <script>
+        window.errorMessage = 'El numero de mesa ya existe.';
+    </script>
+    @endif
 </div>
 
 <!-- Modal -->
@@ -66,9 +71,6 @@
                         <input type="number" class="form-control" id="numero_mesa" name="numero_mesa" required>
                     </div>
                     <div id="error-numero-mesa" class="text-danger mt-1" style="display: none;">El numero de mesa es obligatorio.</div>
-                    @error('numero_mesa')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
                     <div class="mb-3">
                         <label for="capacidad" class="form-label">Capacidad</label>
                         <input type="number" class="form-control" id="capacidad" name="capacidad" required>

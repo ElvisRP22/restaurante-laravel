@@ -13,3 +13,15 @@ const notyf = new Notyf({
 if (window.errorMessage) {
     notyf.error(window.errorMessage);
 }
+
+if (window.successMessage) {
+    notyf.success(window.successMessage);
+}
+
+if (window.infoMessage) {
+    notyf.info(window.infoMessage);
+}
+
+if (window.warningMessage) {
+    notyf.warning(window.warningMessage);
+}
