@@ -23,7 +23,7 @@ class ProductosRepository implements IProductosRepository
 
     public function update($id, array $data)
     {
-        return Producto::update($id, $data);
+        return Producto::find($id)->update($data);
     }
 
     public function delete($id)

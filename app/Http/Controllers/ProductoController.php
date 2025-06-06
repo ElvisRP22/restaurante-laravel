@@ -47,7 +47,6 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar todo, incluyendo la imagen como archivo
         $validated = $request->validate([
             'id_categoria' => 'required|numeric',
             'nombre' => 'required|string|max:255|unique:productos,nombre',
@@ -57,18 +56,13 @@ class ProductoController extends Controller
             'estado' => 'required|boolean',
         ]);
 
-        // Procesar imagen
         $imagen = $request->file('imagen');
         $filename = time() . '.' . $imagen->getClientOriginalExtension();
         $imagen->move(public_path('storage/imagenes'), $filename);
-
-        // Reemplazar 'imagen' en el array validado
         $validated['imagen'] = $filename;
-
-        // Crear producto con datos ya limpios
         $this->repo->create($validated);
 
-        return redirect()->route('home.productos.index');
+        return redirect()->route('home.productos.index')->with('success', 'Producto creado correctamente.');
     }
 
 
@@ -91,8 +85,9 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
+        $categorias = $this->repoCategoria->getAll();
         $producto = $this->repo->getById($id);
-        return view('home.productos.edit', compact('producto'));
+        return view('home.productos.edit', compact('producto', 'categorias'));
     }
 
     /**
@@ -104,19 +99,30 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'id_categoria' => 'required|numeric',
-                'nombre' => 'required|string|max:255',
-                'descripcion' => 'required|string|max:255',
-                'precio' => 'required|numeric',
-                'imagen' => 'required|string|max:255',
-                'estado' => 'required|boolean',
-            ]
-        );
-        $this->repo->update($id, $request->all());
-        return redirect()->route('home.productos.index');
+        $validated = $request->validate([
+            'id_categoria' => 'required|numeric',
+            'nombre' => 'required|string|max:255|unique:productos,nombre,' . $id . ',id_producto',
+            'descripcion' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:1',
+            'imagen' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'estado' => 'required|boolean',
+        ]);
+        $producto = $this->repo->getById($id);
+        if ($request->hasFile('imagen')) {
+            if ($producto->imagen && file_exists(public_path('storage/imagenes/' . $producto->imagen))) {
+                unlink(public_path('storage/imagenes/' . $producto->imagen));
+            }
+            $file = $request->file('imagen');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/imagenes', $filename);
+            $validated['imagen'] = $filename;
+        } else {
+            $validated['imagen'] = $producto->imagen;
+        }
+        $this->repo->update($id, $validated);
+        return redirect()->route('home.productos.index')->with('success', 'Producto actualizado correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -127,6 +133,6 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return redirect()->route('home.productos.index');
+        return redirect()->route('home.productos.index')->with("success", "Producto eliminado correctamente");
     }
 }

@@ -50,7 +50,7 @@ class CategoriasController extends Controller
         //
         
         $validated =$request->validate([
-            'descripcion' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255|unique:categorias',
         ]);
 
         $this->repo->create($validated);
