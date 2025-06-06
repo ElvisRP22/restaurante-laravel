@@ -3,7 +3,15 @@
 @section('content')
     <div class="container mt-2">
         <p class="h2 mb-3">Listado de Productos</p>
-        <a href="{{ route('home.productos.create') }}" class="btn btn-success mb-3">Nuevo Producto</a>
+        <div class="row">
+            <div class="col-md-8">
+                <a href="{{ route('home.productos.create') }}" class="btn btn-success mb-3">Nuevo Producto</a>
+            </div>
+            <div class="col-md-4 text-end">
+                <input type="search" class="form-control" placeholder="Buscar producto...">
+            </div>
+        </div>
+        
         @if ($productos->count())
             <table class="table">
                 <thead>
