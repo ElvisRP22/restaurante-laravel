@@ -44,9 +44,9 @@
     </div>
     @endif
     @if($errors->has('descripcion'))
-    <div class="alert alert-danger">
-        El registro ya existe.
-    </div>
+    <script>
+        window.errorMessage = 'El registro ya existe.';
+    </script>
     @endif
 </div>
 
@@ -67,9 +67,6 @@
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                     </div>
                     <div id="error-descripcion" class="text-danger mt-1" style="display: none;">El campo descripción es obligatorio.</div>
-                    @error('descripcion')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
                     <input type="hidden" id="categoria_id" name="categoria_id">
                 </div>
                 <div class="modal-footer">
