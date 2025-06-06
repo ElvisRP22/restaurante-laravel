@@ -43,6 +43,11 @@
         No hay categorías registradas.
     </div>
     @endif
+    @if($errors->has('descripcion'))
+    <div class="alert alert-danger">
+        El registro ya existe.
+    </div>
+    @endif
 </div>
 
 <!-- Modal -->
