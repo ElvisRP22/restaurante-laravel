@@ -9,7 +9,6 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
                             <div class="row mb-2">
                                 <label for="dni" class="col-md-12 col-form-label ">DNI</label>
                                 <div class="col-md-12">
@@ -53,8 +52,9 @@
                             </div>
 
                             <div class="row mb-2">
-                                <label for="clave" class="col-md-12 col-form-label ">Clave</label>
-                                <div class="col-md-12">
+                                <label for="clave" class="col-md-6 col-form-label ">Clave</label>
+                                <label for="clave_confirmation" class="col-md-6 col-form-label ">Confirmar Clave</label>
+                                <div class="col-md-6">
                                     <input id="clave" type="password"
                                         class="form-control @error('clave') is-invalid @enderror" name="clave" required>
                                     @error('clave')
@@ -63,19 +63,15 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <label for="clave_confirmation" class="col-md-12 col-form-label ">Confirmar Clave</label>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <input id="clave_confirmation" type="password" class="form-control"
                                         name="clave_confirmation" required>
                                 </div>
                             </div>
-
                             <div class="row mb-2">
-                                <label for="fecha_ingreso" class="col-md-12 col-form-label ">Fecha de Ingreso</label>
-                                <div class="col-md-12">
+                                <label for="fecha_ingreso" class="col-md-6 col-form-label ">Fecha de Ingreso</label>
+                                <label for="rol" class="col-md-6 col-form-label ">Rol</label>
+                                <div class="col-md-6">
                                     <input id="fecha_ingreso" type="date"
                                         class="form-control @error('fecha_ingreso') is-invalid @enderror"
                                         name="fecha_ingreso" value="{{ old('fecha_ingreso', now()->format('Y-m-d')) }}"
@@ -86,11 +82,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <label for="rol" class="col-md-12 col-form-label ">Rol</label>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <select name="rol" id="rol"
                                         class="form-control @error('rol') is-invalid @enderror" required>
                                         <option value="empleado" {{ old('rol') == 'empleado' ? 'selected' : '' }}>Empleado
@@ -105,7 +97,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
