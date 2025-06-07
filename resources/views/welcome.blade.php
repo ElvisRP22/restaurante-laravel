@@ -30,6 +30,21 @@
         }
     </style>
 </head>
+<!-- /chat bot -->
+
+                <script>
+                window.watsonAssistantChatOptions = {
+                    integrationID: "96082424-6d2e-4a00-b603-d4124f4c7fc3", // The ID of this integration.
+                    region: "aws-us-east-1", // The region your integration is hosted in.
+                    serviceInstanceID: "20250501-2025-2420-603b-74d3f4d27dd3", // The ID of your service instance.
+                    onLoad: async (instance) => { await instance.render(); }
+                };
+                setTimeout(function(){
+                    const t=document.createElement('script');
+                    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+                    document.head.appendChild(t);
+                });
+                </script>
 
 <body>
     <nav class="navbar fixed-top navbar-expand-md navbar-expand-sm bg-body-tertiary">
