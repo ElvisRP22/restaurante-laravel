@@ -47,7 +47,7 @@
         @enderror
         <div class="col-md-4 mb-3">
             <label for="precio" class="form-label">Precio:</label>
-            <input type="number" class="form-control" id="precio" name="precio" placeholder="20.00">
+            <input type="number" class="form-control" id="precio" name="precio" placeholder="20.00" min="1">
         </div>
 
         <!--Upload imagen-->
