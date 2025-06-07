@@ -11,7 +11,7 @@
                 <input type="search" class="form-control" placeholder="Buscar producto...">
             </div>
         </div>
-        
+
         @if ($productos->count())
             <table class="table">
                 <thead>
@@ -29,15 +29,15 @@
                 <tbody>
                     @foreach ($productos as $producto)
                         <tr>
-                            <td scope="col">{{ $producto->id_producto }}</td>
+                            <td>{{ $producto->id_producto }}</td>
                             <td>{{ $producto->categoria->descripcion ?? 'Sin categoría' }}</td>
                             <td>{{ $producto->nombre }}</td>
                             <td>{{ $producto->descripcion }}</td>
                             <td>{{ $producto->precio }}</td>
-                            <th>
+                            <td>
                                 <img src="{{ asset('storage/imagenes/' . $producto->imagen) }}" alt="producto"
                                     class="img-fluid" width="50" height="50">
-                            </th>
+                            </td>
                             <td><span
                                     class="badge {{ $producto->estado ? 'bg-success' : 'bg-danger' }}">{{ $producto->estado ? 'Disponible' : 'No Disponible' }}</span>
                             </td>
@@ -73,22 +73,23 @@
         @endif
     </div>
 @endsection
-
-<script>
-    function confirmarEliminacion(id) {
-        Swal.fire({
-            title: '¿Estás seguro de eliminar este producto?',
-            text: "¡Esta acción no se puede deshacer!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('form-eliminar-' + id).submit();
-            }
-        });
-    }
-</script>
+@section('scripts')
+    <script>
+        function confirmarEliminacion(id) {
+            Swal.fire({
+                title: '¿Estás seguro de eliminar este producto?',
+                text: "¡Esta acción no se puede deshacer!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('form-eliminar-' + id).submit();
+                }
+            });
+        }
+    </script>
+@endsection

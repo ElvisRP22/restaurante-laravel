@@ -16,4 +16,9 @@ class EmpleadoRepository implements IEmpleadoRepository
     {
         return Empleado::where('usuario', $username)->first();
     }
+
+    public function getAll()
+    {
+        return Empleado::all();
+    }
 }
