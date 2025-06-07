@@ -27,19 +27,22 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="{{ route('home.productos.index') }}" class="sidebar-link">
+                    <a href="{{ route('home.productos.index') }}"
+                        class="sidebar-link {{ request()->routeIs('home.productos.index') ? 'active' : '' }}">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span>Productos</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('home.categorias.index') }}" class="sidebar-link">
+                    <a href="{{ route('home.categorias.index') }}"
+                        class="sidebar-link sidebar-link {{ request()->routeIs('home.categorias.index') ? 'active' : '' }}">
                         <i class='bx bxs-category-alt'></i>
                         <span>Categorías</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('home.mesas.index') }}" class="sidebar-link">
+                    <a href="{{ route('home.mesas.index') }}"
+                        class="sidebar-link {{ request()->routeIs('home.mesas.index') ? 'active' : '' }}">
                         <i class='bx bx-table'></i>
                         <span>Mesas</span>
                     </a>
@@ -51,7 +54,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('home.empleados.index') }}" class="sidebar-link">
+                    <a href="{{ route('home.empleados.index') }}" 
+                    class="sidebar-link {{ request()->routeIs('home.empleados.index') ? 'active' : '' }}">
                         <i class='bx bxs-user-badge'></i>
                         <span>Empleados</span>
                     </a>
