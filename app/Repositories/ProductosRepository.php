@@ -6,9 +6,14 @@ use App\Models\Producto;
 
 class ProductosRepository implements IProductosRepository
 {
-    public function getAll()
+    public function getAll($busqueda)
     {
-        return Producto::with('categoria')->get();
+        //Agregar paginacion en el return
+        $builder = Producto::orderBy('nombre');
+        if ($busqueda) {
+            $builder->where('nombre', 'like', '%' . $busqueda . '%');
+        }
+        return $builder->paginate(2);
     }
 
     public function getById($id)

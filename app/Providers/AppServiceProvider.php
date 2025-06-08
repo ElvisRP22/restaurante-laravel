@@ -11,6 +11,7 @@ use App\Repositories\IMesaRepository;
 use App\Repositories\IProductosRepository;
 use App\Repositories\MesaRepository;
 use App\Repositories\ProductosRepository;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,5 +37,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Paginator::useBootstrapFour();
     }
 }
