@@ -90,5 +90,7 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         //
+        $this->empleadoRepository->delete($id);
+        return redirect()->route('home.empleados.index')->with("success", "Empleado eliminado correctamente");
     }
 }

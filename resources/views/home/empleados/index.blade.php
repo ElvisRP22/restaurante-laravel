@@ -36,6 +36,21 @@
                             <td>{{ $empleado->rol }}</td>
                             <td>{{ $empleado->usuario }}</td>
                             <td>{{ $empleado->fecha_ingreso }}</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    <i class='bx bx-refresh'></i>
+                                </a>
+                                <form id="form-eliminar-{{ $empleado->id_empleado }}"
+                                    action="{{ route('home.empleados.destroy', $empleado->id_empleado) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="confirmarEliminacion('{{ $empleado->id_empleado }}')">
+                                        <i class='bx bxs-trash'></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -45,11 +60,31 @@
                 No hay empleados registrados.
             </div>
         @endif
+        @if (session('success'))
+            <script>
+                window.successMessage = '{{ session('success') }}';
+            </script>
+        @endif
 
     </div>
 @endsection
 @section('scripts')
     <script>
-        
+        function confirmarEliminacion(id) {
+            Swal.fire({
+                title: '¿Estás seguro de eliminar este empleado?',
+                text: "¡Esta acción no se puede deshacer!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('form-eliminar-' + id).submit();
+                }
+            });
+        }
     </script>
 @endsection
