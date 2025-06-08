@@ -24,9 +24,8 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         $busqueda = trim($request->get('busqueda'));
-        $categorias = $this->repoCategoria->getAll();
         $productos = $this->repo->getAll($busqueda);
-        return view('home.productos.index', compact('productos'));
+        return view('home.productos.index', compact('productos', 'busqueda'));
     }
 
     /**

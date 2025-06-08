@@ -10,7 +10,7 @@
             <div class="col-md-4 text-end">
                 <form action="{{route('home.productos.index')}}" method="GET" class="row">
                     <div class="col-md-8">
-                        <input type="search" class="form-control" placeholder="Buscar producto...">
+                        <input type="search" class="form-control" placeholder="Buscar producto..." value="{{ $busqueda }}" name="busqueda">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary">Buscar</button>
