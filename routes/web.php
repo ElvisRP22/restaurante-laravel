@@ -33,6 +33,10 @@ Route::post('/carrito/agregar', [CartaController::class, 'agregarAlCarrito'])->n
 Route::post('/carrito/confirmar', [CartaController::class, 'confirmarCarrito'])->name('carrito.confirmar');
 
 
+Route::get('/visor', [PedidoController::class, 'visor'])->name('visor.visor');
+Route::post('/pedido/{id}/marcar-listo', [PedidoController::class, 'marcarListo'])->name('pedido.marcarListo');
+
+
 
 // Rutas de autenticación
 Auth::routes();

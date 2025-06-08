@@ -1,11 +1,12 @@
 <?php
-
+/*
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pedido;
 
-class Mesa extends Model
+class Mesas extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_mesa';
@@ -18,6 +19,8 @@ class Mesa extends Model
 
     public function pedidos()
     {
-        return $this->hasMany(Pedidos::class, 'id_mesa', 'id_mesa');
+        return $this->hasMany(Pedido::class, 'id_mesa', 'id_mesa');
     }
 }
+
+*/

@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,3 +22,4 @@ class MediosDePago extends Model
         return $this->hasMany(Pagos::class, 'id_medio_pago', 'id_medio_pago');
     }
 }
+*/

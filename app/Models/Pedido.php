@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mesa;
 
-class Pedidos extends Model
+class Pedido extends Model
 {
     use HasFactory;
-
+/*
     protected $primaryKey = 'id_pedido';
 
     protected $fillable = [
@@ -54,5 +55,26 @@ class Pedidos extends Model
     public function detallePedidos()
     {
         return $this->hasMany(DetallePedido::class, 'id_pedido', 'id_pedido');
+    }*/
+
+
+    //david
+
+        use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'mesa',
+        'producto_id',
+        'cantidad',
+        'fecha',
+        'estado',
+        'sesion_id'
+    ];
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'producto_id');
     }
+
 }

@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +21,7 @@ class Pagos extends Model
     //un pago pertenece a un pedido
     public function pedido()
     {
-        return $this->belongsTo(Pedidos::class, 'id_pedido', 'id_pedido');
+        return $this->belongsTo(Pedido::class, 'id_pedido', 'id_pedido');
     }
 
     //un pago tiene un medio de pago
@@ -30,3 +30,4 @@ class Pagos extends Model
         return $this->belongsTo(MediosDePago::class, 'id_medio_pago', 'id_medio_pago');
     }
 }
+*/

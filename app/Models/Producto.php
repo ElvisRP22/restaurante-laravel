@@ -44,11 +44,6 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
-
-    // Laravel por defecto usa 'id' como primaryKey, así que esta línea ya no es necesaria:
-    // protected $primaryKey = 'id_producto';
-
-    // Campos permitidos para asignación masiva
     protected $fillable = [
         'nombre',
         'descripcion',
@@ -56,6 +51,5 @@ class Producto extends Model
         'imagen'
     ];
 
-    // Relaciones: si ya no tienes categorías ni detallePedidos, puedes eliminarlas
-    // Si en el futuro agregas, puedes volver a definirlas
+
 }

@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,4 +29,4 @@ class DetallePedido extends Model
     {
         return $this->belongsTo(Producto::class, 'id_producto', 'id_producto');
     }
-}
+}*/

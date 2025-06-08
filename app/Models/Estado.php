@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,3 +20,4 @@ class Estados extends Model
         return $this->belongsToMany(Pedidos::class, "pedidos_estados", "id_estado", "id_pedido");
     }
 }
+*/

@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Pedido;
 use Illuminate\Support\Facades\DB;
 
 class CartaController extends Controller
@@ -31,7 +34,7 @@ class CartaController extends Controller
 
 
 
-
+/*------------------------CARRITO----------------------------- */
 
 
 
@@ -55,6 +58,7 @@ public function agregarAlCarrito(Request $request)
         $carrito[$productoId]['cantidad'] += $cantidad;
     } else {
         // Traemos los datos del producto para mostrar en el carrito
+
         $producto = \App\Models\Producto::find($productoId);
         $carrito[$productoId] = [
             'nombre' => $producto->nombre,
@@ -98,4 +102,7 @@ public function confirmarCarrito()
 
 
 
+
 }
+
+
