@@ -29,6 +29,10 @@ Route::post('/mesa/{mesa}/ingresar-dni', [ClienteController::class, 'iniciarSesi
 Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
 
 
+Route::post('/carrito/agregar', [CartaController::class, 'agregarAlCarrito'])->name('carrito.agregar');
+Route::post('/carrito/confirmar', [CartaController::class, 'confirmarCarrito'])->name('carrito.confirmar');
+
+
 
 // Rutas de autenticación
 Auth::routes();
