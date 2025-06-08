@@ -13,10 +13,25 @@ use App\Http\Controllers\WelcomeController;
 |--------------------------------------------------------------------------
 */
 
+
+/*PARA ABRIR LA CARTA (ELVIS) */
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
+
+
+/*CARTA DAVID CON OTRA BD */
+
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CartaController;
+use App\Http\Controllers\PedidoController;
+
+Route::get('/mesa/{mesa}', [CartaController::class, 'mostrarCarta']);
+Route::post('/mesa/{mesa}/ingresar-dni', [ClienteController::class, 'iniciarSesionCliente'])->name('cliente.iniciar');
+Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
+
+
+
 // Rutas de autenticación
 Auth::routes();
-
 Route::middleware(['auth', 'admin'])->prefix('home')->name('home.')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
     Route::resource('categorias', CategoriasController::class);
