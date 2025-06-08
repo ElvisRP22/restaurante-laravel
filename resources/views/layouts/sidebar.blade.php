@@ -44,11 +44,13 @@
             <span>Mesas</span>
           </a>
         </li>
+
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="{{ route('home.pedidos.index') }}" class="sidebar-link">
             <i class='bx bxs-grid-alt'></i>
             <span>Pedidos</span>
           </a>
+
         </li>
         <li class="sidebar-item">
           <a href="#" class="sidebar-link">

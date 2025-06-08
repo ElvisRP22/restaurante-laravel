@@ -3,7 +3,9 @@
 @section('content')
     <div class="container mt-2">
         <p class="h2 mb-3">Listado de Productos</p>
-        <a href="{{ route('home.productos.create') }}" class="btn btn-success mb-3">Nuevo Producto</a>
+        <a href="{{ route('productos.create') }}" class="btn btn-success mb-3">Nuevo Pedido</a>
+
+
         @if ($productos->count())
             <table class="table">
                 <thead>

@@ -6,7 +6,7 @@ use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\PedidosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +22,21 @@ Route::middleware(['auth', 'admin'])->prefix('home')->name('home.')->group(funct
     Route::resource('categorias', CategoriasController::class);
     Route::resource('productos', ProductoController::class);
     Route::resource('mesas', MesaController::class);
+    Route::resource('pedidos', PedidosController::class);
+    
 });
+Route::get('/test-relacion', function() {
+    $pedido = \App\Models\Pedido::with('estado')->first();
+    
+    if ($pedido && $pedido->estado) {
+        dd($pedido->estado->descripcion); // Muestra la descripción del estado
+    } else {
+        dd("No se encontró el pedido o no tiene estado asignado");
+    }
+});
+
+
+
+
 
 
