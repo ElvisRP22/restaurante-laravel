@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\categorias\CategoriasController;
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,8 @@ Route::middleware(['auth', 'admin'])->prefix('home')->name('home.')->group(funct
     Route::resource('categorias', CategoriasController::class);
     Route::resource('productos', ProductoController::class);
     Route::resource('mesas', MesaController::class);
+    Route::resource('empleados', EmpleadoController::class);
+    
 });
 
 

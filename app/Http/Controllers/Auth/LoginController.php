@@ -30,7 +30,8 @@ class LoginController extends Controller
         $empleado = $this->empleadoRepository->findByUsername($request->input('usuario'));
 
         if ($empleado && Hash::check($request->input('clave'), $empleado->clave)) {
-            Auth::login($empleado);
+            $remember = $request->has('remember');
+            Auth::login($empleado, $remember);
             return redirect()->intended($this->redirectTo);
         }
 

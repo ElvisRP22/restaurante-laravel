@@ -12,12 +12,12 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home/empleados';
     protected $empleadoRepository;
 
     public function __construct(IEmpleadoRepository $empleadoRepository)
     {
-        $this->middleware('guest');
+        $this->middleware(['auth','admin']);
         $this->empleadoRepository = $empleadoRepository;
     }
 
