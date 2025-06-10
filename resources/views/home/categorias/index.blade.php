@@ -3,9 +3,14 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="mb-4">Listado de Categorías</h1>
-
-    <button class="btn btn-success mb-3" onclick="abrirModal()">Nueva Categoría</button>
-
+    <div class="row">
+            <div class="col-md-8">
+                <button class="btn btn-success mb-3" onclick="abrirModal()">Nueva Categoría</button>
+            </div>
+            <div class="col-md-4 text-end">
+                <input type="search" class="form-control" placeholder="Buscar categoria...">
+            </div>
+        </div>
     @if($categorias->count())
     <table class="table ">
         <thead>

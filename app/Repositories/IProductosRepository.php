@@ -4,9 +4,9 @@ namespace App\Repositories;
 
 interface IPedidosRepositorio
 {
-    public function obtenerTodos();
-    public function obtenerPorId($id);
-    public function crear(array $data);
-    public function actualizar($id, array $data);
-    public function eliminar($id);
+    public function getAll($busqueda);
+    public function getById($id);
+    public function create(array $data);
+    public function update($id, array $data);
+    public function delete($id);
 }
