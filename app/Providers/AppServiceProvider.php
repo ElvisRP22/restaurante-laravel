@@ -11,6 +11,8 @@ use App\Repositories\IMesaRepository;
 use App\Repositories\IProductosRepository;
 use App\Repositories\MesaRepository;
 use App\Repositories\ProductosRepository;
+use App\Repositories\IPedidosRepositorio;
+use App\Repositories\PedidosRepositorio;
 use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IEmpleadoRepository::class, EmpleadoRepository::class);
         $this->app->bind(IProductosRepository::class, ProductosRepository::class);
         $this->app->bind(IMesaRepository::class, MesaRepository::class);
+        $this->app->bind(IPedidosRepositorio::class, PedidosRepositorio::class);
     }
 
     /**

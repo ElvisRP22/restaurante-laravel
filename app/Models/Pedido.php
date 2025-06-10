@@ -5,52 +5,70 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedidos extends Model
+class Pedido extends Model
 {
     use HasFactory;
 
+    // Clave primaria personalizada
     protected $primaryKey = 'id_pedido';
 
+    // Asignación masiva permitida
     protected $fillable = [
         'id_cliente',
         'id_empleado',
         'id_mesa',
-        'total',
-        'fecha_registro'
+        'id_estado',
+        'total'
+        ,
     ];
+    protected $casts = [
+    'fecha_registro' => 'datetime',
+];
 
-    // un pedido tiene un cliente
+    /**
+     * Relación: Pedido pertenece a un Cliente
+     */
     public function cliente()
     {
-        return $this->belongsTo(Clientes::class, 'id_cliente', 'id_cliente');
+        return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
     }
 
-    // un pedido tiene un empleado
-    public function empleados()
+    /**
+     * Relación: Pedido pertenece a un Empleado
+     */
+    public function empleado()
     {
         return $this->belongsTo(Empleado::class, 'id_empleado', 'id_empleado');
     }
 
+    /**
+     * Relación: Pedido tiene muchos estados (muchos a muchos)
+     */
     public function estados()
     {
-        return $this->belongsToMany(Estados::class, 'pedidos_estados', 'id_pedido', 'id_estado')
+        return $this->belongsToMany(Estado::class, 'pedidos_estados', 'id_pedido', 'id_estado')
                     ->withTimestamps();
     }
 
-    // un pedido tiene muchos pagos
+    /**
+     * Relación: Pedido tiene muchos Pagos
+     */
     public function pagos()
     {
-        return $this->hasMany(Pagos::class, 'id_pedido', 'id_pedido');
+        return $this->hasMany(Pago::class, 'id_pedido', 'id_pedido');
     }
 
-
-    //un pedido tiene una mesa
+    /**
+     * Relación: Pedido pertenece a una Mesa
+     */
     public function mesa()
     {
-        return $this->belongsTo(Mesas::class, 'id_mesa', 'id_mesa');
+        return $this->belongsTo(Mesa::class, 'id_mesa', 'id_mesa');
     }
 
-    // un pedido tiene muchos detalles
+    /**
+     * Relación: Pedido tiene muchos detalles de pedido
+     */
     public function detallePedidos()
     {
         return $this->hasMany(DetallePedido::class, 'id_pedido', 'id_pedido');
