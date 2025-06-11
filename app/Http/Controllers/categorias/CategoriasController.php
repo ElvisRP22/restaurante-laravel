@@ -21,11 +21,12 @@ class CategoriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $categorias = $this->repo->getAll();
-        return view('home.categorias.index', compact('categorias'));
+        $busqueda = trim($request->get('busqueda'));
+        $categorias = $this->repo->getAllWithPagination($busqueda);
+        return view('home.categorias.index', compact('categorias', 'busqueda'));
     }
 
     /**
