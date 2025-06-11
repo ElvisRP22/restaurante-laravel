@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido extends Model
+class Pedidos extends Model
 {
     use HasFactory;
 
@@ -55,7 +55,7 @@ class Pedido extends Model
      */
     public function pagos()
     {
-        return $this->hasMany(Pago::class, 'id_pedido', 'id_pedido');
+        return $this->hasMany(Pagos::class, 'id_pedido', 'id_pedido');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface IPedidosRepositorio
+interface IProductosRepository
 {
     public function getAll($busqueda);
     public function getById($id);
