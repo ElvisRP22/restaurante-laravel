@@ -37,6 +37,6 @@ class Empleado extends Authenticatable
     // Un empleado atiende a muchos pedidos
     public function pedidos()
     {
-        return $this->hasMany(Pedidos::class, 'id_cliente', 'id_cliente');
+        return $this->hasMany(Pedido::class, 'id_cliente', 'id_cliente');
     }
 }
