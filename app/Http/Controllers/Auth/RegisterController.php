@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\IEmpleadoRepository;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -17,7 +19,7 @@ class RegisterController extends Controller
 
     public function __construct(IEmpleadoRepository $empleadoRepository)
     {
-        $this->middleware(['auth','admin']);
+        $this->middleware(['auth', 'admin']);
         $this->empleadoRepository = $empleadoRepository;
     }
 
@@ -29,12 +31,29 @@ class RegisterController extends Controller
             'rol' => ['required', 'string', 'max:50'],
             'usuario' => ['required', 'string', 'max:50', 'unique:empleados'],
             'clave' => ['required', 'string', 'min:8', 'confirmed'],
-            'fecha_ingreso' => ['required', 'date'],
+            'fecha_ingreso' => ['required', 'date', 'before_or_equal'],
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $empleado = $this->create($request->all());
+
+        // NO loguear al nuevo empleado
+        // $this->guard()->login($empleado);
+        return redirect()->route('home.empleados.index')->with('success', 'Empleado registrado correctamente');
     }
 
     protected function create(array $data)
     {
+        //Agregar log
+        Log::channel('empleados')->info('Registro de empleado', [
+            'dni' => $data['dni'],
+            'nombre' => $data['nombre'],
+            'creado por' => auth()->user()->nombre,
+        ]);
         return $this->empleadoRepository->create([
             'dni' => $data['dni'],
             'nombre' => $data['nombre'],
