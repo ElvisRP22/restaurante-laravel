@@ -31,7 +31,7 @@ Route::middleware(['auth', 'admin'])->prefix('home')->name('home.')->group(funct
 
 // Ruta de prueba fuera del grupo con middleware
 Route::get('/test-relacion', function() {
-    $pedido = \App\Models\Pedido::with('estado')->first();
+    $pedido = \App\Models\Pedidos::with('estado')->first();
     
     if ($pedido && $pedido->estado) {
         dd($pedido->estado->descripcion);
