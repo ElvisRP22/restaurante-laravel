@@ -36,6 +36,13 @@ Route::post('/carrito/confirmar', [CartaController::class, 'confirmarCarrito'])-
 Route::get('/visor', [PedidoController::class, 'visor'])->name('visor.visor');
 Route::post('/pedido/{id}/marcar-listo', [PedidoController::class, 'marcarListo'])->name('pedido.marcarListo');
 
+use App\Http\Controllers\ComprobanteController;
+
+Route::post('/pedir-comprobante', [ComprobanteController::class, 'solicitar'])->name('pedir.comprobante');
+
+
+
+
 
 
 // Rutas de autenticación

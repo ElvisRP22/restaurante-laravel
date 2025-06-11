@@ -7,44 +7,46 @@
 </head>
 <body>
 
-<!--PARA MOSTRAR LA CARTA-->
+<!-----------PARA MOSTRAR LA CARTA-------------->
 
-<div class="container mt-4">
-    <h1>Carta de Mesa {{ $mesa }}</h1>
-    
+    <div class="container mt-4">
+        <h1>Carta de Mesa {{ $mesa }}</h1>
+        
 
-<!--Crea un bucle-->
-    <div class="row">
-        @foreach ($productos as $producto)
-        <div class="col-md-4">
+        <!--Crea un bucle-->
+        <div class="row">
+            @foreach ($productos as $producto)
+            <div class="col-md-4">
 
-            <div class="card mb-3">
-                <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
+                <div class="card mb-3">
+                    <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
 
-                <div class="card-body">
-                    <h5 class="card-title">{{ $producto->nombre }}</h5>
-                    <p class="card-text">{{ $producto->descripcion }}</p>
-                    <p class="card-text"><strong>S/ {{ $producto->precio }}</strong></p>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $producto->nombre }}</h5>
+                        <p class="card-text">{{ $producto->descripcion }}</p>
+                        <p class="card-text"><strong>S/ {{ $producto->precio }}</strong></p>
 
-                    @if (session('cliente_id'))
-                    <form method="POST" action="{{ route('carrito.agregar') }}">
-                        @csrf
-                        <input type="hidden" name="producto_id" value="{{ $producto->id }}">
-                        <input type="number" name="cantidad" value="1" min="1" class="form-control mb-2" required>
-                        <button type="submit" class="btn btn-warning w-100">Agregar al carrito</button>
-                    </form>
-                    @endif
-                    
+                        @if (session('cliente_id'))
+                        <form method="POST" action="{{ route('carrito.agregar') }}">
+                            @csrf
+                            <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+                            <input type="number" name="cantidad" value="1" min="1" class="form-control mb-2" required>
+                            <button type="submit" class="btn btn-warning w-100">Agregar al carrito</button>
+                        </form>
+                        @endif
+
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
-</div>
+
+<!--------------------------------------------------------------------------->
 
 
 
-
+<!------CARRITO---------------->
 
     @if (session('carrito'))
     <div class="container mt-5">
@@ -69,7 +71,22 @@
     </div>
     @endif
 
+<!---------------------------------------------->
 
+
+<!--PEDIR COMPROBANTE-->
+
+    <div>
+        <form method="POST" action="{{ route('pedir.comprobante') }}">
+        @csrf
+        <input type="hidden" name="mesa" value="{{ session('mesa') }}">
+        <input type="hidden" name="sesion_id" value="{{ session('sesion_id') }}">
+        
+        <button class="btn btn-primary mt-3">🧾 Pedir Comprobante</button>
+        </form>
+
+        
+    </div>
 
 
 </body>
