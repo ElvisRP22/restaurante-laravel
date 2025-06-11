@@ -8,6 +8,10 @@ class SesionMesa extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'session_id';
+
+    public $timestamps = false;
+
     protected $fillable = [
         'mesa',
         'cliente_id',

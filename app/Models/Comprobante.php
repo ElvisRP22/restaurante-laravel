@@ -9,6 +9,8 @@ class Comprobante extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = ['mesa', 'sesion_id', 'estado'];
 
 
