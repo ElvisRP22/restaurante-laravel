@@ -3,12 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\Pedido;
+use App\Models\Pedidos;
 
 class PedidosRepositorio implements IPedidosRepositorio
 {
     protected $model;
 
-    public function __construct(Pedido $pedido)
+    public function __construct(Pedidos $pedido)
     {
         $this->model = $pedido;
     }
