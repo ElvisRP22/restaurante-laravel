@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 interface IProductosRepository
 {
-    public function getAll($busqueda);
+    public function getAll($busqueda, $rows);
     public function getById($id);
     public function create(array $data);
     public function update($id, array $data);

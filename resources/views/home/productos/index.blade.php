@@ -9,8 +9,19 @@
             </div>
             <div class="col-md-4 text-end">
                 <form action="{{ route('home.productos.index') }}" method="GET" class="row">
-                    <input type="search" class="form-control" placeholder="Ingresa una descripción y presiona enter"
+                    <div class="input-group">
+                        <div class="col-md-2 me-2">
+                            <select name="rows" class="form-select" onchange="this.form.submit()">
+                                <option value="2" {{ request('rows') == 2 ? 'selected' : '' }}>2</option>
+                                <option value="5" {{ request('rows') == 5 ? 'selected' : '' }}>5</option>
+                                <option value="10" {{ request('rows') == 10 ? 'selected' : '' }}>10</option>
+                                <option value="25" {{ request('rows') == 25 ? 'selected' : '' }}>25</option>
+                            </select>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Buscar producto"
                         value="{{ $busqueda }}" name="busqueda">
+                    </div>
+                    
                 </form>
             </div>
         </div>

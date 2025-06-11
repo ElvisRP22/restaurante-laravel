@@ -6,14 +6,17 @@ use App\Models\Producto;
 
 class ProductosRepository implements IProductosRepository
 {
-    public function getAll($busqueda)
+    public function getAll($busqueda, $rows)
     {
-        //Agregar paginacion en el return
+
         $builder = Producto::orderBy('nombre');
         if ($busqueda) {
-            $builder->where('nombre', 'like', '%' . $busqueda . '%');
+            $builder->where('nombre', 'like', '%' . $busqueda . '%' );
         }
-        return $builder->paginate(2);
+        return $builder->paginate($rows)->appends([
+            'busqueda' => $busqueda,
+            'rows' => $rows
+        ]);
     }
 
     public function getById($id)
