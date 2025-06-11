@@ -8,13 +8,9 @@
                 <a href="{{ route('home.productos.create') }}" class="btn btn-success mb-3">Nuevo Producto</a>
             </div>
             <div class="col-md-4 text-end">
-                <form action="{{route('home.productos.index')}}" method="GET" class="row">
-                    <div class="col-md-8">
-                        <input type="search" class="form-control" placeholder="Buscar producto..." value="{{ $busqueda }}" name="busqueda">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
-                    </div>
+                <form action="{{ route('home.productos.index') }}" method="GET" class="row">
+                    <input type="search" class="form-control" placeholder="Ingresa una descripción y presiona enter"
+                        value="{{ $busqueda }}" name="busqueda">
                 </form>
             </div>
         </div>
@@ -68,10 +64,8 @@
                     @endforeach
                 </tbody>
             </table>
-            <!--Crear paginacion personalizada-->
-            <div class="d-flex">
-                {{ $productos->links() }}
-            </div>
+            <!--Crear paginacion-->
+            {{ $productos->links() }}
         @else
             <div class="alert alert-warning">
                 No hay productos registrados.

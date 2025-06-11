@@ -117,14 +117,12 @@
         </div>
     </div>
     <div class="container">
-
         <div class="scroll-container d-flex mt-3">
             <button type="button" class="btn btn-outline-warning btn-carousel filter-btn" data-filter="0">Todos</button>
             @foreach($categorias as $categoria)
             <button type="button" class="btn btn-outline-warning btn-carousel filter-btn" data-filter="{{ $categoria->id_categoria }}">{{ $categoria->descripcion }}</button>
             @endforeach
         </div>
-
     </div>
     <div class="container mt-3 mb-3">
         <div class="row" id="productos">

@@ -6,6 +6,15 @@ use App\Models\Categoria;
 
 class CategoriasRepository implements ICategoriasRepository
 {
+    public function getAllWithPagination($busqueda)
+    {
+        //Agregar paginacion en el return
+        $builder = Categoria::orderBy('descripcion');
+        if ($busqueda) {
+            $builder->where('descripcion', 'like', '%' . $busqueda . '%');
+        }
+        return $builder->paginate(2);
+    }
     public function getAll()
     {
         return Categoria::all();
