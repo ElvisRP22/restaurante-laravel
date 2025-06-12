@@ -17,7 +17,7 @@ use App\Http\Controllers\WelcomeController;
 /*PARA ABRIR LA CARTA (ELVIS) */
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
 
-
+/*--------------------------------------------------------------------------- */
 /*CARTA DAVID CON OTRA BD */
 
 use App\Http\Controllers\ClienteController;
@@ -37,13 +37,14 @@ Route::get('/visor', [PedidoController::class, 'visor'])->name('visor.visor');
 Route::post('/pedido/{id}/marcar-listo', [PedidoController::class, 'marcarListo'])->name('pedido.marcarListo');
 
 use App\Http\Controllers\ComprobanteController;
-
 Route::post('/pedir-comprobante', [ComprobanteController::class, 'solicitar'])->name('pedir.comprobante');
 
+use App\Http\Controllers\ComprobantesVisorController;
+Route::get('/visor_comprobantes', [ComprobantesVisorController::class, 'visor'])->name('visor.visor_comprobantes');
+Route::post('/comprobante/{id}/marcar-listo', [ComprobantesVisorController::class, 'marcarListo'])->name('comprobante.marcarListo');
 
 
-
-
+/*--------------------------------------------------------------------------------------------------------*/
 
 // Rutas de autenticación
 Auth::routes();

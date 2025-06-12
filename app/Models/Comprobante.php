@@ -11,7 +11,12 @@ class Comprobante extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['mesa', 'sesion_id', 'estado'];
+    protected $fillable = [
+        'mesa', 
+        'sesion_id', 
+        'fecha',
+        'estado'
+    ];
 
 
 }
