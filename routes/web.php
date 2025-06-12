@@ -10,6 +10,15 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\Auth\RegisterController;
 
+use App\Http\Controllers\ClienteController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Ruta para el CRUD de clientes
+Route::resource('clientes', ClienteController::class);
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

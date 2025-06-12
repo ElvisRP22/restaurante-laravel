@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mesas', function (Blueprint $table) {
-            $table->bigIncrements('id_mesa');
-            $table->integer('numero_mesa')->unique();
-            $table->integer('capacidad');
-            $table->boolean('estado');
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->bigIncrements('id_categoria');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mesas');
+        Schema::dropIfExists('categorias');
     }
 };

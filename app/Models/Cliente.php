@@ -8,16 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_cliente';
 
-    protected $fillable = [
-        'dni',
-        'nombre',
-        'telefono'
-    ];
-    // un cliente tiene muchos pedidos
-    public function pedidos()
-    {
-        return $this->hasMany(Pedidos::class, 'id_cliente', 'id_cliente');
-    }
+    protected $primaryKey = 'id_cliente'; // si tu clave primaria se llama así
+    protected $fillable = ['nombre', 'mesa', 'pedido', 'estado', 'total'];
 }
