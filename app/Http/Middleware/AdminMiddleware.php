@@ -18,7 +18,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (! Auth::check() || Auth::user()->rol !== 'admin') {
-            abort(403, 'No tienes permisos para acceder a esta página');
+            return redirect()->route('home.index')->with('info', 'Algunas secciones estan disponibles solo para administradores');
         }
         return $next($request);
     }

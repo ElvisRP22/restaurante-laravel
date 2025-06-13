@@ -19,7 +19,7 @@ class RegisterController extends Controller
 
     public function __construct(IEmpleadoRepository $empleadoRepository)
     {
-        $this->middleware(['auth', 'admin']);
+        //$this->middleware(['auth', 'admin']);
         $this->empleadoRepository = $empleadoRepository;
     }
 
@@ -31,7 +31,7 @@ class RegisterController extends Controller
             'rol' => ['required', 'string', 'max:50'],
             'usuario' => ['required', 'string', 'max:50', 'unique:empleados'],
             'clave' => ['required', 'string', 'min:8', 'confirmed'],
-            'fecha_ingreso' => ['required', 'date', 'before_or_equal'],
+            'fecha_ingreso' => ['required', 'date', 'before_or_equal:today'],
         ]);
     }
 
@@ -49,11 +49,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //Agregar log
+        /*
         Log::channel('empleados')->info('Registro de empleado', [
             'dni' => $data['dni'],
             'nombre' => $data['nombre'],
             'creado por' => auth()->user()->nombre,
         ]);
+        */
         return $this->empleadoRepository->create([
             'dni' => $data['dni'],
             'nombre' => $data['nombre'],
