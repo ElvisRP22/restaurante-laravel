@@ -25,7 +25,7 @@ class WelcomeController extends Controller
     public function index()
     {
         //
-        $productos = $this->productosRepository->getAll();
+        $productos = $this->productosRepository->getAll2();
         $categorias = $this->categoriasRepository->getAll();
         return view('welcome', compact('productos', 'categorias'));
     }

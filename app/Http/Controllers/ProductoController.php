@@ -53,7 +53,7 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:255|unique:productos,nombre',
             'descripcion' => 'required|string|max:255',
             'precio' => 'required|numeric|min:1',
-            'imagen' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+            'imagen' => 'required|file|mimes:jpg,jpeg,png',
             'estado' => 'required|boolean',
         ]);
 

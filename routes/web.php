@@ -9,27 +9,28 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 
-use App\Http\Controllers\ClienteController;
-
+/*
+|--------------------------------------------------------------------------
 Route::get('/', function () {
     return view('welcome');
 });
 
 // Ruta para el CRUD de clientes
-Route::resource('clientes', ClienteController::class);
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
 // Rutas de autenticación
 Auth::routes();
 
-Route::middleware(['auth', 'admin'])->prefix('home')->name('home.')->group(function () {
+Route::middleware(['auth'])->prefix('home')->name('home.')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::resource('categorias', CategoriasController::class);
+    Route::resource('productos', ProductoController::class);
+    Route::resource('mesas', MesaController::class);
+    Route::resource('pedidos', PedidosController::class);
+    Route::resource('empleados', EmpleadoController::class)->middleware('admin');
+});
+
+// Ruta de prueba fuera del grupo con middleware
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
     Route::resource('categorias', CategoriasController::class);
     Route::resource('productos', ProductoController::class);

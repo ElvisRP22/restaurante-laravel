@@ -18,6 +18,10 @@ class ProductosRepository implements IProductosRepository
             'rows' => $rows
         ]);
     }
+    public function getAll2()
+    {
+        return Producto::all();
+    }
 
     public function getById($id)
     {
