@@ -5,6 +5,7 @@ namespace App\Http\Controllers\categorias;
 use Illuminate\Http\Request;
 use App\Repositories\ICategoriasRepository;
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 
 class CategoriasController extends Controller
 {
@@ -49,8 +50,8 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         //
-        
-        $validated =$request->validate([
+
+        $validated = $request->validate([
             'descripcion' => 'required|string|max:255|unique:categorias',
         ]);
 
@@ -67,7 +68,7 @@ class CategoriasController extends Controller
     public function show($id)
     {
         //
-        
+
     }
 
     /**
@@ -109,7 +110,11 @@ class CategoriasController extends Controller
     public function destroy($id)
     {
         //
-        $this->repo->delete($id);
+
+
+        if (!$this->repo->delete($id)) {
+            return redirect()->route('home.categorias.index')->with('info', 'No se puede eliminar una categoria con productos asociados');
+        }
         return redirect()->route('home.categorias.index');
     }
 }

@@ -84,7 +84,7 @@
         </div>
         @if (session('info'))
             <script>
-                window.successMessage = '{{ session('info') }}';
+                window.errorMessage = '{{ session('info') }}';
             </script>
         @endif
     </div>

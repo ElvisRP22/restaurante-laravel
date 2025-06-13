@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Categoria;
+use Exception;
 
 class CategoriasRepository implements ICategoriasRepository
 {
@@ -37,6 +38,10 @@ class CategoriasRepository implements ICategoriasRepository
 
     public function delete($id)
     {
-        return Categoria::find($id)->delete();
+        $categoria = Categoria::withCount('productos')->findOrFail($id);
+        if ($categoria->productos_count > 0) {
+            return false;
+        }
+        return $categoria->delete();
     }
 }
