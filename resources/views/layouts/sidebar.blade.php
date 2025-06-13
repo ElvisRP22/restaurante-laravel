@@ -61,6 +61,13 @@
                         <span>Empleados</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('home.medios-de-pago.index') }}"
+                        class="sidebar-link {{ request()->routeIs('home.medios-de-pago.index') ? 'active' : '' }}">
+                        <i class='bx bx-money-withdraw'></i>
+                        <span>Medios de pago</span>
+                    </a>
+                </li>
             </ul>
             <div class="sidebar-footer d-flex flex-column justify-content-center align-items-center text-center mb-3">
                 <p style="color: white">{{ Auth::user()->nombre }}</p>

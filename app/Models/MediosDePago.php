@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class MediosDePago extends Model
 {
     use HasFactory;
-
+    protected $table = 'medios_de_pago';
     protected $primaryKey = 'id_medio_pago';
 
     protected $fillable = [
-        'descripcion',
-        'monto'
+        'descripcion'
     ];
     
     //un medio de pago puese usarse por mucho pagos

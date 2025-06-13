@@ -10,6 +10,8 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MediosDePagoController;
+use App\Models\Pedidos;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +30,12 @@ Route::middleware(['auth'])->prefix('home')->name('home.')->group(function () {
     Route::resource('mesas', MesaController::class);
     Route::resource('pedidos', PedidosController::class);
     Route::resource('empleados', EmpleadoController::class)->middleware('admin');
+    Route::resource('medios-de-pago', MediosDePagoController::class);
 });
 
 // Ruta de prueba fuera del grupo con middleware
 Route::get('/test-relacion', function() {
-    $pedido = \App\Models\Pedidos::with('estado')->first();
+    $pedido = Pedidos::with('estado')->first();
     
     if ($pedido && $pedido->estado) {
         dd($pedido->estado->descripcion);
