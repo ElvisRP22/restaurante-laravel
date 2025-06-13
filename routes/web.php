@@ -13,11 +13,11 @@ use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
+// Ruta para el CRUD de clientes
 // Rutas de autenticación
 Auth::routes();
 
@@ -28,6 +28,15 @@ Route::middleware(['auth'])->prefix('home')->name('home.')->group(function () {
     Route::resource('mesas', MesaController::class);
     Route::resource('pedidos', PedidosController::class);
     Route::resource('empleados', EmpleadoController::class)->middleware('admin');
+});
+
+// Ruta de prueba fuera del grupo con middleware
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::resource('categorias', CategoriasController::class);
+    Route::resource('productos', ProductoController::class);
+    Route::resource('mesas', MesaController::class);
+    Route::resource('pedidos', PedidosController::class);
+    Route::resource('empleados', EmpleadoController::class);
 });
 
 // Ruta de prueba fuera del grupo con middleware
