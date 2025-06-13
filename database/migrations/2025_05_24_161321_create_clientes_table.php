@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mesas', function (Blueprint $table) {
-            $table->bigIncrements('id_mesa');
-            $table->integer('numero')->unique();
-            $table->enum('estado', ['libre', 'ocupada', 'reservada']);
+        Schema::create('clientes', function (Blueprint $table) {
+            $table->bigIncrements('id_cliente');
+            $table->string('dni',8)->unique();
+            $table->string('nombre',100);
+            $table->string('telefono',9)->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mesas');
+        Schema::dropIfExists('clientes');
     }
 };
