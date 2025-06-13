@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id_categoria');
-            $table->string('descripcion');
+            $table->string('descripcion')->unique();
             $table->timestamps();
         });
     }
