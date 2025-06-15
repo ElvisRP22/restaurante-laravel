@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Models\Mesa;
 use App\Models\Estado;
 use App\Models\Pedido;
+use App\Models\Pedidos;
 use Illuminate\Http\Request;
 
 use App\Repositories\IPedidosRepositorio;
@@ -28,37 +30,36 @@ class PedidosController extends Controller
     public function create()
     {
         $clientes = Cliente::all();
-    $empleados = Empleado::all();
-    $mesas = Mesa::all();
-    $estados = Estado::all();
+        $empleados = Empleado::all();
+        $mesas = Mesa::all();
+        $estados = Estado::all();
 
-    return view('home.pedidos.create', compact('clientes', 'empleados', 'mesas', 'estados'));
-
+        return view('home.pedidos.create', compact('clientes', 'empleados', 'mesas', 'estados'));
     }
 
     public function store(Request $request)
     {
-       $validated = $request->validate([
-        'id_cliente' => 'required|exists:clientes,id',
-        'id_empleado' => 'required|exists:empleados,id',
-        'id_mesa' => 'required|exists:mesas,id',
-        'id_estado' => 'required|exists:estados,id',
-        'total' => 'required|numeric|min:0',
-        'fecha_registro' => 'required|date',
-    ]);
+        $validated = $request->validate([
+            'id_cliente' => 'required|exists:clientes,id',
+            'id_empleado' => 'required|exists:empleados,id',
+            'id_mesa' => 'required|exists:mesas,id',
+            'id_estado' => 'required|exists:estados,id',
+            'total' => 'required|numeric|min:0',
+            'fecha_registro' => 'required|date',
+        ]);
 
-    Pedido::create($validated);
+        Pedidos::create($validated);
 
-    return redirect()->route('home.pedidos.index')
-        ->with('success', 'Pedido creado exitosamente.');
+        return redirect()->route('home.pedidos.index')
+            ->with('success', 'Pedido creado exitosamente.');
     }
 
-  public function edit($id)
-{
-    $pedido = $this->pedidos->obtenerPorId($id);
-    dd($pedido->fecha_registro); // Verifica qué contiene este campo
-    return view('home.pedidos.edit', compact('pedido'));
-}
+    public function edit($id)
+    {
+        $pedido = $this->pedidos->obtenerPorId($id);
+        dd($pedido->fecha_registro); // Verifica qué contiene este campo
+        return view('home.pedidos.edit', compact('pedido'));
+    }
 
     public function update(Request $request, $id)
     {
@@ -82,3 +83,4 @@ class PedidosController extends Controller
         return redirect()->route('home.pedidos.index')->with('success', 'Pedido eliminado correctamente.');
     }
 }
+

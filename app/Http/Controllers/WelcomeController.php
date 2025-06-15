@@ -22,12 +22,13 @@ class WelcomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($mesa_n = 0)
     {
         //
+        session(['numero_mesa'=>$mesa_n]);
         $productos = $this->productosRepository->getAll2();
         $categorias = $this->categoriasRepository->getAll();
-        return view('welcome', compact('productos', 'categorias'));
+        return view('welcome', compact('productos', 'categorias', 'mesa_n'));
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Repositories\IEmpleadoRepository;
 use App\Repositories\EmpleadoRepository;
 use App\Repositories\IMediosDePagoRepository;
 use App\Repositories\IMesaRepository;
+use App\Repositories\IPedidosCarritoRepository;
 use App\Repositories\IProductosRepository;
 use App\Repositories\MesaRepository;
 use App\Repositories\ProductosRepository;

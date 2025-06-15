@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Pedido;
 use App\Models\Pedidos;
+use Illuminate\Http\Request;
 
 class PedidosRepositorio implements IPedidosRepositorio
 {
@@ -43,4 +44,3 @@ class PedidosRepositorio implements IPedidosRepositorio
         return $pedido->delete();
     }
 }
-

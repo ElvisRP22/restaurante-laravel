@@ -23,7 +23,6 @@ class DetallePedido extends Model
     {
         return $this->belongsTo(Pedidos::class, 'id_pedido', 'id_pedido');
     }
-
     //un detalle contiene un producto
     public function productos()
     {

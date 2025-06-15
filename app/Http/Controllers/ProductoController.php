@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\ICategoriasRepository;
 use App\Repositories\IProductosRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -57,10 +58,9 @@ class ProductoController extends Controller
             'estado' => 'required|boolean',
         ]);
 
-        $imagen = $request->file('imagen');
-        $filename = time() . '.' . $imagen->getClientOriginalExtension();
-        $imagen->move(public_path('storage/imagenes'), $filename);
-        $validated['imagen'] = $filename;
+        $path = $request->file('imagen')->store('imagenes', 'public');
+        $validated['imagen'] = basename($path);
+
         $this->repo->create($validated);
 
         return redirect()->route('home.productos.index')->with('success', 'Producto creado correctamente.');
@@ -108,19 +108,21 @@ class ProductoController extends Controller
             'imagen' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'estado' => 'required|boolean',
         ]);
+
         $producto = $this->repo->getById($id);
+
         if ($request->hasFile('imagen')) {
-            if ($producto->imagen && file_exists(public_path('storage/imagenes/' . $producto->imagen))) {
-                unlink(public_path('storage/imagenes/' . $producto->imagen));
+            if ($producto->imagen && Storage::disk('public')->exists('imagenes/' . $producto->imagen)) {
+                Storage::disk('public')->delete('imagenes/' . $producto->imagen);
             }
-            $file = $request->file('imagen');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/imagenes', $filename);
-            $validated['imagen'] = $filename;
+            $path = $request->file('imagen')->store('imagenes', 'public');
+            $validated['imagen'] = basename($path);
         } else {
             $validated['imagen'] = $producto->imagen;
         }
+
         $this->repo->update($id, $validated);
+
         return redirect()->route('home.productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
